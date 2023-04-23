@@ -29,11 +29,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - name: Installing dependencies 
+    - name: Install dependencies 
       run: npm ci
-    - name: Building the application 
+    - name: Build the application 
       run: npm run build
-    - name: Running the linter 
+    - name: Run the linter 
       run: npm run lint
-    - name: Running formatter check  
+    - name: Run formatter check  
       run: npm run format:check
