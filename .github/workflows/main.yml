@@ -1,4 +1,4 @@
-name: Build for the branch main
+name: Main
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: ['18.x']
+        node-version: [node-lts]
 
     steps:
     - uses: actions/checkout@v3
