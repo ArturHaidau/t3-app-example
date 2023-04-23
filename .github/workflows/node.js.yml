@@ -6,6 +6,13 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  DATABASE_URL: file:./db.sqlite
+  NEXTAUTH_URL: http://localhost:3000
+  NEXTAUTH_SECRET: a4s5d4as5da5sd
+  DISCORD_CLIENT_ID: 0
+  DISCORD_CLIENT_SECRET: a7sd8a78c7as87ca
+
 jobs:
   build:
 
@@ -13,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: ['18']
+        node-version: [18]
 
     steps:
     - uses: actions/checkout@v3
@@ -22,6 +29,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm run lint
-    - run: npm run format:check
+    - name: Installing dependencies 
+      run: npm ci
+    - name: Building the application 
+      run: npm run build
+    - name: Running the linter 
+      run: npm run lint
+    - name: Running formatter check  
+      run: npm run format:check
