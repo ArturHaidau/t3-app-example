@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Build for the branch main
 
 on:
   push:
@@ -8,10 +8,10 @@ on:
 
 env:
   DATABASE_URL: ${{ secrets.DATABASE_URL }}
-  NEXTAUTH_URL: http://localhost:3000
-  NEXTAUTH_SECRET: a4s5d4as5da5sd
-  DISCORD_CLIENT_ID: 0
-  DISCORD_CLIENT_SECRET: a7sd8a78c7as87ca
+  NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+  NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+  DISCORD_CLIENT_ID: ${{ secrets.DISCORD_CLIENT_ID }}
+  DISCORD_CLIENT_SECRET: ${{ secrets.DISCORD_CLIENT_SECRET }}
 
 jobs:
   build:
@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18]
+        node-version: ['18.x']
 
     steps:
     - uses: actions/checkout@v3
