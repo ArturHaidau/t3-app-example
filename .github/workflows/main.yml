@@ -1,4 +1,4 @@
-name: Main
+name: T3 application
 
 on:
   push:
@@ -15,7 +15,7 @@ env:
 
 jobs:
   build:
-
+    name: main build
     runs-on: ubuntu-latest
 
     strategy:
