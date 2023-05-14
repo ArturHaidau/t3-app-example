@@ -12,6 +12,9 @@ jobs:
     strategy:
       matrix:
         node-version: [18]
+      
+    env:
+      DATABASE_URL: ${{secrets.DATABASE_URL}} 
 
     steps:
     - uses: actions/checkout@v3
@@ -23,9 +26,7 @@ jobs:
     - name: Install dependencies 
       run: npm ci
     - name: Build the application
-      env:
-        DATABASE_URL: ${{secrets.DATABASE_URL}} 
-      run: echo "Running with $DATABASE_URL" && npm run build
+      run: npm run build
     - name: Run the linter 
       run: npm run lint
     - name: Run formatter check  
