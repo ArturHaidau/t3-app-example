@@ -1,13 +1,13 @@
-import { type Person } from '@prisma/client';
+import { type Person as PersonType } from '@prisma/client';
 import { createServerSideHelpers } from '@trpc/react-query/server';
 import { type InferGetStaticPropsType } from 'next';
+import CreatePerson from '~/components/CreatePerson';
 import Layout from '~/components/Layout';
-import PersonCmp from '~/components/Person';
+import Person from '~/components/Person';
 import { appRouter } from '~/server/api/root';
 import { prisma } from '~/server/db';
-import { api } from '~/utils/api';
 
-const REVALIDATE_IN_SECONDS = 10;
+const REVALIDATE_IN_SECONDS = 3;
 
 export async function getStaticProps() {
   const helpers = createServerSideHelpers({
@@ -19,31 +19,21 @@ export async function getStaticProps() {
     props: {
       persons: JSON.parse(
         JSON.stringify(await helpers.persons.getAll.fetch())
-      ) as Person[],
+      ) as PersonType[],
     },
   };
 }
 
 const CRUD = ({ persons }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const mutation = api.persons.create.useMutation();
-  const handleCreate = () => {
-    mutation.mutate({
-      name: 'asd',
-      heightInCm: 545,
-      dateOfBirth: new Date('1999-11-30'),
-    });
-    alert('Created');
-  };
-
   return (
     <Layout>
-      <div className="text-8xl">Page with CRUD</div>
-      <div>
+      <div className="p-7 text-8xl">Page with CRUD</div>
+      <div className="container flex w-fit flex-shrink-0 flex-row flex-wrap gap-8 border-4 border-white p-7">
         {persons.map((x) => (
-          <PersonCmp key={x.id} {...x} />
+          <Person key={x.id} {...x} />
         ))}
       </div>
-      <button onClick={handleCreate}>Create</button>
+      <CreatePerson />
     </Layout>
   );
 };

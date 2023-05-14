@@ -1,6 +1,7 @@
 import {
   PersonCreateInputObjectSchema,
   PersonDeleteOneSchema,
+  PersonUpdateOneSchema,
 } from 'prisma/generated/schemas';
 import { createTRPCRouter, publicProcedure } from '~/server/api/trpc';
 
@@ -13,6 +14,11 @@ const router = createTRPCRouter({
     .input(PersonDeleteOneSchema)
     .mutation(({ ctx, input: { where } }) =>
       ctx.prisma.person.delete({ where })
+    ),
+  update: publicProcedure
+    .input(PersonUpdateOneSchema)
+    .mutation(({ ctx, input: { data, where } }) =>
+      ctx.prisma.person.update({ data, where })
     ),
 });
 
