@@ -4,6 +4,9 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  DATABASE_URL: ${{env.DATABASE_URL}} 
+
 jobs:
   build:
     name: main build
@@ -23,8 +26,6 @@ jobs:
     - name: Install dependencies 
       run: npm ci
     - name: Build the application
-      env:
-        DATABASE_URL: ${{env.DATABASE_URL}} 
       run: npm run build
     - name: Run the linter 
       run: npm run lint
