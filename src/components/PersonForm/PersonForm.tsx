@@ -1,5 +1,5 @@
-import { type Person } from '@prisma/client';
 import { useForm } from 'react-hook-form';
+import { type PersonWithoutId } from '~/types';
 import styles from './PersonForm.module.css';
 
 interface Form {
@@ -9,8 +9,8 @@ interface Form {
 }
 
 interface Props {
-  person?: Person;
-  handleSubmit: (person: Omit<Person, 'id'>) => unknown;
+  person?: PersonWithoutId;
+  handleSubmit: (person: PersonWithoutId) => unknown;
   handleCancel?: () => unknown;
 }
 
@@ -22,7 +22,7 @@ const toPerson = (data: Form) => ({
 
 const toDateInput = (date: Date) => date.toString().split('T')[0];
 
-const toFormPerson = (data: Person) => ({
+const toFormPerson = (data: PersonWithoutId) => ({
   ...data,
   dateOfBirth: toDateInput(data.dateOfBirth),
   heightInCm: data.heightInCm.toString(),

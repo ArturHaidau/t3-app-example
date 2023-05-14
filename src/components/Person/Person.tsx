@@ -2,21 +2,22 @@ import { type Person as PersonType } from '@prisma/client';
 import { useState } from 'react';
 import { api } from '~/utils/api';
 import PersonForm from '../PersonForm';
+import { type PersonWithoutId } from '~/types';
 
-const Person = (person: PersonType) => {
+const Person = ({ id, ...data }: PersonType) => {
   const [isEdited, setIsEdited] = useState(false);
   const deletePerson = api.persons.delete.useMutation();
   const updatePerson = api.persons.update.useMutation();
 
   const handleDelete = () => {
-    deletePerson.mutate({ where: { id: person.id } });
+    deletePerson.mutate({ where: { id } });
     alert('Deleted');
   };
   const handleEdit = () => {
     setIsEdited(true);
   };
-  const handleEditSubmit = (data: Omit<PersonType, 'id'>) => {
-    updatePerson.mutate({ where: { id: person.id }, data });
+  const handleEditSubmit = (data: PersonWithoutId) => {
+    updatePerson.mutate({ where: { id }, data });
     alert('Edited');
     setIsEdited(false);
   };
@@ -29,11 +30,11 @@ const Person = (person: PersonType) => {
       {!isEdited ? (
         <div className="container flex w-80 flex-col gap-2 p-2">
           <div>
-            <div>Name: {person.name}</div>
+            <div>Name: {data.name}</div>
             <div>
-              Date of birth: {new Date(person.dateOfBirth).toDateString()}
+              Date of birth: {new Date(data.dateOfBirth).toDateString()}
             </div>
-            <div>Height in cm: {person.heightInCm}</div>
+            <div>Height in cm: {data.heightInCm}</div>
           </div>
           <div className="container flex flex-row gap-3 font-bold">
             <button onClick={handleEdit}>Edit</button>
@@ -42,7 +43,7 @@ const Person = (person: PersonType) => {
         </div>
       ) : (
         <PersonForm
-          person={person}
+          person={data}
           handleSubmit={handleEditSubmit}
           handleCancel={handleEditCancel}
         />
