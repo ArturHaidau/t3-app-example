@@ -14,6 +14,7 @@ jobs:
         node-version: [18]
 
     steps:
+    - name: Build steps
       env:
         DATABASE_URL: ${{env.DATABASE_URL}}
     - uses: actions/checkout@v3
