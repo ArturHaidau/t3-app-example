@@ -1,11 +1,11 @@
+import { type PersonWithoutId } from '~/types';
 import { api } from '~/utils/api';
 import PersonForm from '../PersonForm';
-import { type Person } from '@prisma/client';
 
 const CreatePerson = () => {
   const createPerson = api.persons.create.useMutation();
 
-  const handleSubmit = (person: Omit<Person, 'id'>) => {
+  const handleSubmit = (person: PersonWithoutId) => {
     createPerson.mutate(person);
     alert('Created');
   };
