@@ -15,8 +15,8 @@ const Person = (person: PersonType) => {
   const handleEdit = () => {
     setIsEdited(true);
   };
-  const handleEditSubmit = ({ id, ...rest }: PersonType) => {
-    updatePerson.mutate({ where: { id }, data: rest });
+  const handleEditSubmit = (data: Omit<PersonType, 'id'>) => {
+    updatePerson.mutate({ where: { id: person.id }, data });
     alert('Edited');
     setIsEdited(false);
   };

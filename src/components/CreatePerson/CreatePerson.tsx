@@ -5,7 +5,7 @@ import { type Person } from '@prisma/client';
 const CreatePerson = () => {
   const createPerson = api.persons.create.useMutation();
 
-  const handleSubmit = (person: Person) => {
+  const handleSubmit = (person: Omit<Person, 'id'>) => {
     createPerson.mutate(person);
     alert('Created');
   };

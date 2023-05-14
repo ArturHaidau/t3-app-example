@@ -10,7 +10,7 @@ interface Form {
 
 interface Props {
   person?: Person;
-  handleSubmit: (person: Person) => unknown;
+  handleSubmit: (person: Omit<Person, 'id'>) => unknown;
   handleCancel?: () => unknown;
 }
 
@@ -34,7 +34,7 @@ const PersonForm = ({ person, handleSubmit, handleCancel }: Props) => {
   });
 
   const onSubmit = useFormHandleSubmit((data) => {
-    handleSubmit({ ...toPerson(data), id: person?.id ?? '' });
+    handleSubmit({ ...toPerson(data) });
   });
 
   return (
