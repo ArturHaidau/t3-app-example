@@ -14,7 +14,11 @@ jobs:
         node-version: [18]
       
     env:
-      DATABASE_URL: ${{secrets.DATABASE_URL}} 
+      DATABASE_URL: ${{secrets.DATABASE_URL}}
+      GOOGLE_ID: ${{secrets.GOOGLE_ID}} 
+      GOOGLE_SECRET: ${{secrets.GOOGLE_SECRET}} 
+      NEXTAUTH_URL: ${{secrets.NEXTAUTH_URL}} 
+      NEXTAUTH_SECRET: ${{secrets.NEXTAUTH_SECRET}} 
 
     steps:
     - uses: actions/checkout@v3
