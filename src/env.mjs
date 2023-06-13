@@ -13,6 +13,7 @@ export const env = createEnv({
     GOOGLE_SECRET: z.string(),
     NEXTAUTH_URL: z.string().url(),
     NEXTAUTH_SECRET: z.string(),
+    EMAIL_SERVER: z.string(),
   },
 
   /**
@@ -35,5 +36,6 @@ export const env = createEnv({
     GOOGLE_SECRET: process.env.GOOGLE_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+    EMAIL_SERVER: process.env.EMAIL_SERVER,
   },
 });

@@ -1,13 +1,11 @@
+import Link from 'next/link';
 import Layout from '~/components/Layout';
 import useAuth from '~/hooks/useAuth';
 
 const Home = () => {
-  const { status, signInWithGoogle, signOut } = useAuth();
+  const { status, signOut } = useAuth();
   return (
     <Layout>
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 text-8xl">
-        Hello, World!
-      </div>
       <div className="text-3xl">
         {status === 'authenticated' ? (
           <span>You are authenticated</span>
@@ -19,7 +17,7 @@ const Home = () => {
         {status === 'authenticated' ? (
           <button onClick={signOut}>Sign out</button>
         ) : (
-          <button onClick={signInWithGoogle}>Sign in with Google</button>
+          <Link href="api/auth/signin">Sign in</Link>
         )}
       </div>
     </Layout>
