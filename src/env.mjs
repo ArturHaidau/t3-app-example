@@ -14,7 +14,6 @@ export const env = createEnv({
     NEXTAUTH_URL: z.string().url(),
     NEXTAUTH_SECRET: z.string(),
     EMAIL_SERVER: z.string(),
-    EMAIL_FROM: z.string(),
   },
 
   /**
@@ -38,6 +37,5 @@ export const env = createEnv({
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     EMAIL_SERVER: process.env.EMAIL_SERVER,
-    EMAIL_FROM: process.env.EMAIL_FROM,
   },
 });

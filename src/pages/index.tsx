@@ -1,8 +1,9 @@
+import Link from 'next/link';
 import Layout from '~/components/Layout';
 import useAuth from '~/hooks/useAuth';
 
 const Home = () => {
-  const { status, signInWithGoogle, signInWithEmail, signOut } = useAuth();
+  const { status, signOut } = useAuth();
   return (
     <Layout>
       <div className="text-3xl">
@@ -16,10 +17,7 @@ const Home = () => {
         {status === 'authenticated' ? (
           <button onClick={signOut}>Sign out</button>
         ) : (
-          <div>
-            <button onClick={signInWithGoogle}>Sign in with Google</button>
-            <button onClick={signInWithEmail}>Sign in with Email</button>
-          </div>
+          <Link href="api/auth/signin">Sign in</Link>
         )}
       </div>
     </Layout>

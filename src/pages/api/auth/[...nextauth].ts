@@ -14,9 +14,6 @@ export default NextAuth({
       clientId: env.GOOGLE_ID,
       clientSecret: env.GOOGLE_SECRET,
     }),
-    EmailProvider({
-      server: env.EMAIL_SERVER,
-      from: env.EMAIL_FROM,
-    }),
+    EmailProvider({ server: env.EMAIL_SERVER }),
   ],
 });
